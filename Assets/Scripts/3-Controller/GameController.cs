@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -10,10 +8,12 @@ public class GameController : MonoBehaviour
     public float speedIncreaseRate;
     public float jumpForce;
     public Vector3 spawnPoint;
+    [SerializeField]
+    private float score;
 
     void Start()
     {
-        gameModel = new GameModel(5f, 1f, 12f);
+        gameModel = new GameModel(playerSpeed, speedIncreaseRate, jumpForce);
         playerModel = new PlayerModel(spawnPoint);
     }
 
@@ -27,7 +27,8 @@ public class GameController : MonoBehaviour
 
     void UpdateGame()
     {
-        gameModel.PlayerSpeed += Time.deltaTime * 0.1f;
+        gameModel.IncreaseSpeed(Time.deltaTime * 0.1f);
         gameModel.IncreaseScore(Time.deltaTime * gameModel.PlayerSpeed);
+        score = gameModel.Score;
     }
 }

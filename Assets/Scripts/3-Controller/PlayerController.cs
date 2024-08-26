@@ -1,22 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerModel playerModel;
-    private PlayerView playerView;
     public GameModel gameModel;
-
-
+    private PlayerView playerView;
     private Rigidbody2D rb;
 
     void Start()
     {
         playerView = GetComponent<PlayerView>();
         rb = GetComponent<Rigidbody2D>();
-        playerModel = new PlayerModel(new Vector3(0, 0, 0));
+        playerModel = new PlayerModel(Vector3.zero);
         gameModel = new GameModel(5f, 1f, 12f);
     }
 
@@ -24,18 +20,22 @@ public class PlayerController : MonoBehaviour
     {
         if (playerModel.IsAlive)
         {
-            MoveForward();
-
-            if (Input.GetKeyDown(KeyCode.Space) && gameModel.IsGrounded)
-            {
-                Jump();
-            }
+            HandleInput();
         }
         else
         {
             RespawnPlayer();
         }
+    }
 
+    void HandleInput()
+    {
+        MoveForward();
+
+        if (Input.GetKeyDown(KeyCode.Space) && gameModel.IsGrounded)
+        {
+            Jump();
+        }
     }
 
     void MoveForward()
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
             gameModel.IsGrounded = true;
         }
     }
+
     public IEnumerator KillPlayer()
     {
         yield return new WaitForSeconds(1);
