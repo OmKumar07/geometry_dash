@@ -14378,6 +14378,7 @@ MonoBehaviour:
   speedIncreaseRate: 0
   jumpForce: 0
   spawnPoint: {x: 0, y: 0, z: 0}
+  score: 0
 --- !u!4 &1652426582
 Transform:
   m_ObjectHideFlags: 0

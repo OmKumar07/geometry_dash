@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public float speedIncreaseRate;
     public float jumpForce;
     public Vector3 spawnPoint;
+    [SerializeField]
+    private float score;
 
     void Start()
     {
@@ -27,5 +29,6 @@ public class GameController : MonoBehaviour
     {
         gameModel.IncreaseSpeed(Time.deltaTime * 0.1f);
         gameModel.IncreaseScore(Time.deltaTime * gameModel.PlayerSpeed);
+        score = gameModel.Score;
     }
 }
